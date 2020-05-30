@@ -24,7 +24,7 @@ class UserManager(BaseUserManager):
             base_salary = 3000.00
         elif position == 'officer':
             base_salary = 2000.00
-            
+
         user = self.model(
             email=self.normalize_email(email),
             base_salary=base_salary,
@@ -62,3 +62,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.position}, {self.name}'
+
+    def net_salary(self):
+        return self.base_salary / 20 * self.attendance

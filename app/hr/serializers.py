@@ -5,16 +5,21 @@ from rest_framework import serializers
 
 class ListEmployeeSerializer(serializers.ModelSerializer):
     """Serializer for Employee model"""
-    #  class Salaries(models.IntegerChoices):
-    #     director = 5000
-    #     manager = 2000
-    #     officer = 1500
-    #
-    # base_salary = models.IntegerField(choices=Salaries.choices)
+    net_salary = serializers.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        )
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'name', 'position', 'base_salary', 'attendance')
+        fields = (
+            'id',
+            'name',
+            'position',
+            'base_salary',
+            'attendance',
+            'net_salary'
+        )
 
 
 class HireEmployeeSerializer(serializers.ModelSerializer):
