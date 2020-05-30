@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
 from django.views.generic.edit import CreateView
+from .permissions import IsHRManager
 
 
 class EmployeesListView(ListAPIView):
@@ -15,4 +16,5 @@ class EmployeesListView(ListAPIView):
 
 class HireEmployeeView(CreateAPIView):
     serializer_class = HireEmployeeSerializer
+    permission_classes = [IsHRManager]
     fields = ['name', 'email', 'password', 'position']
