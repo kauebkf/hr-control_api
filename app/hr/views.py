@@ -31,6 +31,7 @@ class CreateTokenView(ObtainAuthToken):
 class HireEmployeeView(CreateAPIView):
     serializer_class = HireEmployeeSerializer
     permission_classes = [IsHRManager]
+    throttle_classes = []
     fields = ['name', 'email', 'password', 'position']
 
 class Attendance(APIView):

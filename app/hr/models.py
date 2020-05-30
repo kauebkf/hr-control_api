@@ -24,6 +24,8 @@ class UserManager(BaseUserManager):
             base_salary = 3000.00
         elif position == 'officer':
             base_salary = 2000.00
+        else:
+            raise ValueError('Unknown position')
 
         user = self.model(
             email=self.normalize_email(email),
