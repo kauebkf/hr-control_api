@@ -3,7 +3,7 @@ from django.db import models
 from rest_framework import serializers
 
 
-class EmployeeListSerializer(serializers.ModelSerializer):
+class ListEmployeeSerializer(serializers.ModelSerializer):
     """Serializer for Employee model"""
     #  class Salaries(models.IntegerChoices):
     #     director = 5000
@@ -14,4 +14,15 @@ class EmployeeListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'name', 'position')
+        fields = ('id', 'name', 'position', 'base_salary', 'attendance')
+
+
+class HireEmployeeSerializer(serializers.ModelSerializer):
+    """Serializer for Employee model"""
+
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'name', 'position', 'email', 'password')
+
+    def create(self, validated_data):
+        return get_user_model().objects.create_user(**validated_data)

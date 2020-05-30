@@ -18,8 +18,20 @@ class UserManager(BaseUserManager):
             raise ValueError('Employees must have an email address')
         if not position:
             raise ValueError('Missing employee position')
-        user = self.model(email=self.normalize_email(email), **extra_fields)
+        if position == 'director':
+            base_salary = 5000.00
+        elif position == 'manager':
+            base_salary = 3000.00
+        elif position == 'officer':
+            base_salary = 2000.00
+            
+        user = self.model(
+            email=self.normalize_email(email),
+            base_salary=base_salary,
+            **extra_fields
+        )
         user.set_password(password)
+
         user.save(using=self._db)
         return user
 
@@ -47,3 +59,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+    def __str__(self):
+        return f'{self.position}, {self.name}'

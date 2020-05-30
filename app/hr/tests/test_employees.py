@@ -21,6 +21,15 @@ class EmployeesTests(TestCase):
             position = 'manager',
         )
 
+    def test_base_salary_automatically_added(self):
+        employee = get_user_model().objects.create_user(
+            name = 'John Ribbon',
+            email = 'john@company.com',
+            password = 'johnribbon',
+            position = 'manager',
+        )
+        self.assertNotEqual(employee.base_salary, 0)
+
     def test_retrieve_employees_list(self):
         """Returns a list of all employees of the company"""
 
