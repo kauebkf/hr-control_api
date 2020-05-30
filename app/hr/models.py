@@ -41,6 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     joined_on = models.DateField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    base_salary = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    attendance = models.IntegerField(default=0)
 
     objects = UserManager()
 
